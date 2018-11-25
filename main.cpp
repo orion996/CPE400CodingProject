@@ -1,6 +1,6 @@
 /**
-@author Nick Jordy
-@brief Main running file for the CPE400 coding assignment
+*@author Nick Jordy
+*@brief Main running file for the CPE400 coding assignment
 */
 
 #include <iostream>
@@ -10,6 +10,11 @@
 
 using namespace std;
 
+/**
+ * @brief 
+ * @param 
+ * @return
+ */
 int main()
 {
  return 0;

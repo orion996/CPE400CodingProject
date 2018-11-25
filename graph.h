@@ -1,30 +1,18 @@
+/**
+*@author Nick Jordy
+*@brief Graph Data Structure header
+*/
+
 #ifndef GRAPH_H
 #define GRAPH_H
 
 #include <iostream>
 #include <string>
 #include <vector>
-#include "vertex.h"
 
 using namespace std;
 
-class Vertex;
-
-class Edge
-{
-    public:
-        Edge(Vertex *a, Vertex *b, int dist);
-        ~Edge();
-        
-        Vertex getOrigin();
-        Vertex getDestination();
-        int getDistance();
-        
-    private:
-        Vertex *origin;
-        Vertex *destination;
-        int distance;
-};
+class Edge;
 
 class Vertex 
 {
@@ -42,6 +30,24 @@ class Vertex
         string name;
         vector<Edge> edges;
 };
+
+class Edge
+{
+    public:
+        Edge(Vertex *a, Vertex *b, int dist);
+        ~Edge();
+        
+        Vertex getOrigin();
+        Vertex getDestination();
+        int getDistance();
+        
+    private:
+        Vertex *origin;
+        Vertex *destination;
+        int distance;
+};
+
+
 
 class Graph 
 {
