@@ -17,11 +17,13 @@ class Edge;
 class Vertex 
 {
     public:
-        Vertex(string str);
+        Vertex();
+        Vertex(const string str);
         ~Vertex();
         
         void addEdge(Vertex *vert, int dist);
         void printEdges();
+        void printName();
         
         string getName();
         vector<Edge> getEdges();
@@ -29,16 +31,18 @@ class Vertex
     private:
         string name;
         vector<Edge> edges;
+        int iterator;
 };
 
 class Edge
 {
     public:
+        Edge();
         Edge(Vertex *a, Vertex *b, int dist);
         ~Edge();
         
-        Vertex getOrigin();
-        Vertex getDestination();
+        Vertex* getOrigin();
+        Vertex* getDestination();
         int getDistance();
         
     private:
