@@ -12,6 +12,6 @@ graph.o: graph.cpp graph.h
 	
 .PHONY: clean
 clean: 
-	-rm  main.o $(obj)
+	-rm $(obj) Program
 	
 	
