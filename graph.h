@@ -1,69 +1,34 @@
 /**
 *@author Nick Jordy
-*@brief Graph Data Structure header
+*@brief Definition of a Graph
 */
-
 #ifndef GRAPH_H
 #define GRAPH_H
 
 #include <iostream>
 #include <string>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
-class Edge;
-
-class Vertex 
-{
-    public:
-        Vertex();
-        Vertex(const string str);
-        ~Vertex();
-        
-        void addEdge(Vertex *vert, int dist);
-        void printEdges();
-        void printName();
-        
-        string getName();
-        vector<Edge> getEdges();
-        
-    private:
-        string name;
-        vector<Edge> edges;
-        int iterator;
-};
-
-class Edge
-{
-    public:
-        Edge();
-        Edge(Vertex *a, Vertex *b, int dist);
-        ~Edge();
-        
-        Vertex* getOrigin();
-        Vertex* getDestination();
-        int getDistance();
-        
-    private:
-        Vertex *origin;
-        Vertex *destination;
-        int distance;
-};
-
-
+typedef pair<int, int> intPair;
 
 class Graph 
 {
+    private:
+        int numVert;
+        vector< pair<int, int> > *vertices;
+    
     public:
         Graph();
+        Graph(int);
         ~Graph();
         
-        void insertNode(Vertex *vert);
-        void printGraph();
-        
-    private:
-        vector<Vertex*> vertices;
+        void addEdge(int, int, int);
+        void findShortestPath(int);
+    
 };
 
-#endif /*GRAPH_H*/
+#endif /* GRAPH_H */
+
