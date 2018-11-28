@@ -9,6 +9,9 @@
 #include <string>
 #include <vector>
 #include <queue>
+#include <list>
+
+#define INF 0x3f3f3f3f
 
 using namespace std;
 
@@ -18,7 +21,7 @@ class Graph
 {
     private:
         int numVert;
-        vector< pair<int, int> > *vertices;
+        list< pair<int, int> > *vertices;
     
     public:
         Graph();
@@ -26,7 +29,7 @@ class Graph
         ~Graph();
         
         void addEdge(int, int, int);
-        void findShortestPath(int);
+        void findShortestPath(int, int);
     
 };
 
