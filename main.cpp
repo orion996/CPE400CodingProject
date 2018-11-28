@@ -64,8 +64,7 @@ int main()
     mesh->insertNode(&rF);
     
     //Print the Graph
-    DijkstraAlgorithm(*mesh, 6);
-    //mesh->printGraph();
+    mesh->printGraph();
     
     delete mesh;
     return 0;
@@ -74,47 +73,5 @@ int main()
 /**
  * @brief
  * @param
- * @param
  * @return
  */
-void DijkstraAlgorithm(Graph gr, int verticesNum)
-{
-    struct Entry
-    {
-        int distance;
-        char vertex;
-    };
-    
-     if(verticesNum <= 1)
-    {
-        cerr << "GRAPH NEEDS MRE THAN 1 VERTEX TO RUN DijkstraAlgorithm" << endl;
-        return;
-    }
-    
-    Entry entryTable[verticesNum - 1][verticesNum - 1];
-    string Nodes = "\0";
-   
-    //initialize table
-    for(int i=0 ; i<verticesNum-1 ; i++)
-    {
-        for(int j=0 ; j<verticesNum ; j++)
-        {
-            entryTable[i][j].distance = -1;
-            entryTable[i][j].vertex = 'x';
-        }
-            
-    }
-    
-    
-    
-    //print table
-    for(int i=0 ; i<verticesNum-1 ; i++)
-    {
-        for(int j=0 ; j<verticesNum ; j++)
-        {
-            cout << entryTable[i][j].vertex << entryTable[i][j].distance << "|";
-        }
-        cout << "Nodes: " << Nodes << endl;
-            
-    }
-}
