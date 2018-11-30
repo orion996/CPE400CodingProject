@@ -1,4 +1,5 @@
-FORMAT:<A><B><COST>
+FORMAT:
+<A><B><COST>
 0 1 4
 0 7 8
 1 2 8
