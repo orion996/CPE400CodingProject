@@ -13,6 +13,11 @@ using namespace std;
 
 void createGraph(string, Graph*);
 
+/**
+ * @brief
+ * @param
+ * @return
+ */
 int main()
 {
     const int numVert = 9;
@@ -20,7 +25,17 @@ int main()
     
     createGraph("graphData.txt",&network);
     
+    int src = 0;
+    int dest = 0;
+    
+    cout << "Enter the Source Router as an Integer Id (eg. '3'): ";
+    cin >> src;
+    
+    cout << "Enter the Destnation Router as an Integer Id (eg. '3'): ";
+    cin >> dest;
+    
     network.print();
+    network.DijkstraAlgorithm(src,dest);
     
     return 0;
 }

@@ -13,7 +13,6 @@
 Graph::Graph()
 {
     numVert = 1;
-    visited = new bool[numVert];
     //graph = new int*[numVert];
     
     for(int i=0 ; i<SIZE ; i++)
@@ -34,7 +33,6 @@ Graph::Graph()
 Graph::Graph(int n)
 {
     numVert = n;
-    visited = new bool[numVert];
     //graph = new int*[numVert];
     
     for(int i=0 ; i<SIZE ; i++)
@@ -54,7 +52,6 @@ Graph::Graph(int n)
  */
 Graph::~Graph()
 {
-    delete visited;
 }
   
 /**
@@ -92,6 +89,57 @@ void Graph::print()
  * @param
  * @return
  */
-void Graph::maxBandwidthAlgorithm(int src, int dest)
+int Graph::minPath(int dist[], bool sptSet[])
 {
+    int min = __INT_MAX__;
+    int index;
+    
+    for(int i=0 ; i<numVert ; i++)
+    {
+        if(sptSet[i] == false && dist[i]<= min)
+        {
+            min = dist[i];
+            index = i;
+        }
+    }
+    return index;
+}
+
+/**
+ * @brief
+ * @param
+ * @return
+ */
+void Graph::DijkstraAlgorithm(int src, int dest)
+{
+    int dist[numVert];
+    bool sptSet[numVert];
+    int throughVert[numVert];
+    
+    for(int i=0 ; i<numVert ; i++)//initialize all to Infinity
+    {
+        dist[i] = __INT_MAX__;
+        sptSet[i] = false;
+    }
+    
+    dist[src] = 0; //distance of the source to the source is zero
+    
+    for(int i=0 ; i<numVert-1 ; i++)//find the index of the vertex with the desired path
+    {
+        int u = minPath(dist, sptSet);
+    
+        sptSet[u] = true;//add vertex u to the shortest path tree set
+        
+        for(int v=0 ; v<numVert ; v++)
+        {
+            if(!sptSet[v] && graph[u][v] && dist[u] != __INT_MAX__ && dist[u] + graph[u][v] < dist[v])
+            {
+                dist[v] = dist[u] + graph[u][v];
+                throughVert[v] = u;
+            }
+        }
+    }
+    
+    cout << "Shortest distance from Router " << src << " to Router " << dest << " is " << dist[dest] << " through Router " << throughVert[dest] << endl;
+            
 }
