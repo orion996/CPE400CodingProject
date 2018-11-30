@@ -1,9 +1,12 @@
+/**
+*@author Nick Jordy
+*@brief Graph Declaration
+*/
+
 #ifndef GRAPH_H
 #define GRAPH_H
 
 #include <iostream>
-#include <string>
-#include <cstdlib>
 
 #define SIZE 100
 
@@ -23,6 +26,8 @@ class Graph
         
         void addEdge(int, int, int);
         void print();
+        
+        void maxBandwidthAlgorithm(int, int);
         
     
 };

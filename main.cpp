@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <stdio.h>
 #include <string>
 #include "graph.h"
 
@@ -47,8 +48,7 @@ void createGraph(string filename, Graph* network)
 //     network->addEdge(6,7,1);
 //     network->addEdge(7,8,7);
     
-    ifstream fin;
-    fin.open(filename.c_str());
+    ifstream fin(filename.c_str());
     
     if(!fin.good())
     {
@@ -56,18 +56,17 @@ void createGraph(string filename, Graph* network)
         return;
     }
     
-    int vertA, vertB, cost, numEdges;
+    int vertA, vertB, cost;
     string gbg;
     
-    fin >> gbg >> numEdges >> gbg;
+    fin >> gbg;
     
-    for(int i ; i<numEdges ; i++)
+    while(!fin.eof())
     {
-        if(fin.eof())
-            break;
         fin >> vertA >> vertB >> cost;
         //cout << vertA << " " << vertB << " " << cost << endl;
         network->addEdge(vertA, vertB, cost);
+        network->addEdge(vertB, vertA, cost);
     }
     
     fin.close();
