@@ -47,6 +47,29 @@ void createGraph(string filename, Graph* network)
 //     network->addEdge(6,7,1);
 //     network->addEdge(7,8,7);
     
-    ofstream fout;
-    fout.open(filename.c_str());
+    ifstream fin;
+    fin.open(filename.c_str());
+    
+    if(!fin.good())
+    {
+        cerr << "ERROR: FILE PATH '" << filename << "' COULD NOT BE OPENED" << endl;
+        return;
+    }
+    
+    int vertA, vertB, cost, numEdges;
+    string gbg;
+    
+    fin >> gbg >> numEdges >> gbg;
+    
+    for(int i ; i<numEdges ; i++)
+    {
+        if(fin.eof())
+            break;
+        fin >> vertA >> vertB >> cost;
+        //cout << vertA << " " << vertB << " " << cost << endl;
+        network->addEdge(vertA, vertB, cost);
+    }
+    
+    fin.close();
+    
 }
