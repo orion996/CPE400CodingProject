@@ -10,37 +10,38 @@
 
 using namespace std;
 
+void createGraph(int, string, Graph*);
 
-/**
- * @brief The main working functon
- * @param none
- * @return 0 if successful exit, 1 if erroneous exit
- */
 int main()
 {
-    Graph mesh(9);
+    const int numVert = 9;
+    Graph network(numVert);
     
-    mesh.addEdge(0,1,4);
-    mesh.addEdge(0,7,8);
-    mesh.addEdge(1,2,8);
-    mesh.addEdge(1,7,11);
-    mesh.addEdge(2,3,7);
-    mesh.addEdge(2,8,2);
-    mesh.addEdge(2,5,4);
-    mesh.addEdge(3,4,9);
-    mesh.addEdge(3,5,14);
-    mesh.addEdge(4,5,10);
-    mesh.addEdge(5,6,2);
-    mesh.addEdge(6,7,1);
-    mesh.addEdge(6,8,6);
-    mesh.addEdge(7,8,7);
+
+    network.print();
     
-    mesh.findShortestPath(0, 3);
+    
     return 0;
 }
 
-/**
- * @brief
- * @param
- * @return
- */
+void createGraph(int numVert, string filename, Graph* gr)
+{
+//  *********HARD-CODED GRAPH***********    
+//     network.addEdge(0,1,4);
+//     network.addEdge(0,7,8);
+//     network.addEdge(1,2,8);
+//     network.addEdge(1,7,11);
+//     network.addEdge(2,8,2);
+//     network.addEdge(2,3,7);
+//     network.addEdge(2,5,4);
+//     network.addEdge(3,4,9);
+//     network.addEdge(3,5,14);
+//     network.addEdge(4,5,10);
+//     network.addEdge(5,6,2);
+//     network.addEdge(6,8,6);
+//     network.addEdge(6,7,1);
+//     network.addEdge(7,8,7);
+    
+    ofstream fout;
+    fout.open(filename.c_str());
+}

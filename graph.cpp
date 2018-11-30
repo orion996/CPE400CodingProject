@@ -1,99 +1,42 @@
-/**
-*@author Nick Jordy
-*@brief Iplementation for graph
-*/
-
 #include "graph.h"
 
-/**
- * @brief
- * @param
- * @return
- */
 Graph::Graph()
 {
-    numVert = 0;
-    vertices = new list<intPair>[numVert];
 }
 
-/**
- * @brief
- * @param
- * @return
- */
-Graph::Graph(int vertNum)
+Graph::Graph(int n)
 {
-    this->numVert = vertNum;
-    vertices = new list<intPair>[numVert];
+    numVert = n;
+    visited = new bool[numVert];
+    //graph = new int*[numVert];
+    
+    for(int i=0 ; i<SIZE ; i++)
+    {
+        //graph[i] = new int[numVert];
+        for(int j=0 ; j<SIZE ; j++)
+        {
+            graph[i][j] = 0;
+        }
+    }
 }
 
-/**
- * @brief
- * @param
- * @return
- */
 Graph::~Graph()
 {
 }
-
-/**
- * @brief
- * @param
- * @param
- * @param
- * @return
- */
-void Graph::addEdge(int a, int b, int edge)
+        
+void Graph::addEdge(int a, int b, int cost)
 {
-    vertices[a].push_back(make_pair(b, edge));
-    vertices[b].push_back(make_pair(a, edge));
+    if(a > numVert || b > numVert || a < 0 || b < 0 )
+        cerr << "ERROR: INVALID EDGE" << "A=" << a << " B=" << b << endl;
+    else
+        graph[a][b] = cost;
 }
-
-/**
- * @brief Prints the shortest part from srcNode to all other vertices
- * @param srcNode the source node 
- * @return Nothing
- */
-void Graph::findShortestPath(int srcNode, int endNode)
+void Graph::print()
 {
-    priority_queue< intPair, vector<intPair>, greater<intPair> > priorityQueue;
-    
-    vector<int> distances(numVert, INF);
-    
-    priorityQueue.push(make_pair(0, srcNode));
-    distances[srcNode] = 0;
-    
-    vector<intPair>throughNodes(numVert);
-    throughNodes[srcNode] = make_pair(srcNode, srcNode);
-    
-    while(!priorityQueue.empty())
+    for(int i=0 ; i<numVert ; i++)
     {
-        int a = priorityQueue.top().second;
-        //cout << "(" << priorityQueue.top().first << "," << priorityQueue.top().second << ")" << endl;
-        priorityQueue.pop();
-        
-        list< pair<int, int> >::iterator i;
-        for(i=vertices[a].begin() ; i!=vertices[a].end() ; i++)
-        {
-            int b = (*i).first;
-            int cost = (*i).second;
-            
-            if(distances[b] > distances[a] + cost)
-            {
-                distances[b] = distances[a] + cost;
-                priorityQueue.push(make_pair(distances[b], b));
-                
-            }
-        }
-        
+        for(int j=0 ; j<numVert ; j++)
+            cout << graph[i][j] << "    ";
+        cout << endl;
     }
-    //print the shortest path 
-//     cout << "Vertex     Distance from Source" << endl;
-//     for(int i = 0 ; i<numVert ; ++i)
-//     {
-//         cout << i << "\t\t" << distances[i] << endl;
-//     }
-
-    cout << "Vertex     Distance from Source" << endl;
-    cout << endNode << "\t\t" << distances[endNode] << endl;
 }

@@ -1,27 +1,20 @@
-/**
-*@author Nick Jordy
-*@brief Definition of a Graph
-*/
 #ifndef GRAPH_H
 #define GRAPH_H
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include <queue>
-#include <list>
+#include <cstdlib>
 
-#define INF 0x3f3f3f3f
+#define SIZE 100
 
 using namespace std;
-
-typedef pair<int, int> intPair;
 
 class Graph 
 {
     private:
         int numVert;
-        list< pair<int, int> > *vertices;
+        int graph[SIZE][SIZE];
+        bool* visited;
     
     public:
         Graph();
@@ -29,7 +22,8 @@ class Graph
         ~Graph();
         
         void addEdge(int, int, int);
-        void findShortestPath(int, int);
+        void print();
+        
     
 };
 
