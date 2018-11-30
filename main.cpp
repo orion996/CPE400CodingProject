@@ -10,63 +10,17 @@
 
 using namespace std;
 
-void DijkstraAlgorithm(Graph gr, int);
+void createGraph(string, Graph*);
 
-/**
- * @brief The main working functon
- * @param none
- * @return 0 if successful exit, 1 if erroneous exit
- */
 int main()
 {
-    Graph *mesh;// the graph of routers
-    mesh = new Graph();
+    const int numVert = 9;
+    Graph network(numVert);
     
-    //Create Routers
-    Vertex rA("A");
-    Vertex rB("B");
-    Vertex rC("C");
-    Vertex rD("D");
-    Vertex rE("E");
-    Vertex rF("F");
-     
-    //Connect Routers
-    rA.addEdge(&rB, 2);
-    rA.addEdge(&rD, 1);
+    createGraph("graphData.txt",&network);
     
-    rB.addEdge(&rA, 2);
-    rB.addEdge(&rC, 1);
-    rB.addEdge(&rD, 2);
-    rB.addEdge(&rE, 3);
+    network.print();
     
-    rC.addEdge(&rB, 1);
-    rC.addEdge(&rE, 4);
-    rC.addEdge(&rF, 2);
-    
-    rD.addEdge(&rA, 1);
-    rD.addEdge(&rB, 2);
-    rD.addEdge(&rE, 3);
-    
-    rE.addEdge(&rB, 3);
-    rE.addEdge(&rC, 4);
-    rE.addEdge(&rD, 3);
-    rE.addEdge(&rF, 3);
-    
-    rF.addEdge(&rC, 2);
-    rF.addEdge(&rE, 3);
-    
-    //Insert Nodes into the mesh
-    mesh->insertNode(&rA);
-    mesh->insertNode(&rB);
-    mesh->insertNode(&rC);
-    mesh->insertNode(&rD);
-    mesh->insertNode(&rE);
-    mesh->insertNode(&rF);
-    
-    //Print the Graph
-    mesh->printGraph();
-    
-    delete mesh;
     return 0;
 }
 
@@ -75,3 +29,24 @@ int main()
  * @param
  * @return
  */
+void createGraph(string filename, Graph* network)
+{
+//  *********HARD-CODED GRAPH***********    
+//     network->addEdge(0,1,4);
+//     network->addEdge(0,7,8);
+//     network->addEdge(1,2,8);
+//     network->addEdge(1,7,11);
+//     network->addEdge(2,8,2);
+//     network->addEdge(2,3,7);
+//     network->addEdge(2,5,4);
+//     network->addEdge(3,4,9);
+//     network->addEdge(3,5,14);
+//     network->addEdge(4,5,10);
+//     network->addEdge(5,6,2);
+//     network->addEdge(6,8,6);
+//     network->addEdge(6,7,1);
+//     network->addEdge(7,8,7);
+    
+    ofstream fout;
+    fout.open(filename.c_str());
+}
