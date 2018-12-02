@@ -14,6 +14,8 @@ Graph::Graph()
 {
     numVert = 1;
     //graph = new int*[numVert];
+    visited = new bool[numVert];
+    path = new int[numVert];
     
     for(int i=0 ; i<SIZE ; i++)
     {
@@ -23,6 +25,8 @@ Graph::Graph()
             graph[i][j] = 0;
         }
     }
+    for(int i=0 ; i<numVert ; i++)
+        visited[i] = false;
 }
 
 /**
@@ -34,6 +38,8 @@ Graph::Graph(int n)
 {
     numVert = n;
     //graph = new int*[numVert];
+    visited = new bool[numVert];
+    path = new int[numVert];
     
     for(int i=0 ; i<SIZE ; i++)
     {
@@ -43,6 +49,9 @@ Graph::Graph(int n)
             graph[i][j] = 0;
         }
     }
+    
+    for(int i=0 ; i<numVert ; i++)
+        visited[i] = false;
 }
 
 /**
@@ -142,4 +151,55 @@ void Graph::DijkstraAlgorithm(int src, int dest)
     
     cout << "Shortest distance from Router " << src << " to Router " << dest << " is " << dist[dest] << " through Router " << throughVert[dest] << endl;
             
+}
+
+/**
+ * @brief
+ * @param
+ * @return
+ */
+void Graph::maxBandwidthAlgorithm(int src, int dest)
+{
+    int pathIndex = 0;
+    ofstream fout;
+    fout.open("pathInfo.txt");
+    
+    findAllPaths(src, dest, pathIndex, fout);
+    
+    fout.close();
+}
+
+/**
+ * @brief
+ * @param
+ * @return
+ */
+void Graph::findAllPaths(int src, int dest, int pathIndex, ofstream& fout)
+{
+    visited[src] = true;
+    path[pathIndex] = src;
+    pathIndex++;
+    
+    if(src == dest)
+    {
+        for(int i=0; i<pathIndex ; i++)
+        {
+            fout << path[i] << " ";
+        }
+        fout << endl;
+    }
+    else
+    {
+        for(int v=0 ; v<numVert ; v++)
+        {
+            if(!visited[v] && graph[src][v] > 0)
+            {
+                findAllPaths(v, dest, pathIndex, fout);
+            }
+        }
+    }
+    
+    pathIndex--;
+    visited[src] = false;
+    
 }

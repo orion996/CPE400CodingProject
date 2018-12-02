@@ -7,6 +7,7 @@
 #define GRAPH_H
 
 #include <iostream>
+#include <fstream>
 
 #define SIZE 100
 
@@ -17,9 +18,13 @@ class Graph
     private:
         int numVert; //number of vertices
         int graph[SIZE][SIZE]; //the adj table
+        bool* visited;//used by maxBandwidthAlgorithm
+        int *path; //used by maxBandwidthAlgorithm
+ 
         
-        int maxPath(int[], bool[]);// needed by maxBandwidthAlgorithm
         int minPath(int[], bool[]);// used for Dijkstra's
+        void findAllPaths(int, int, int, ofstream&);//used by maxBandwidthAlgorithm
+        
     
     public:
         Graph(); //default

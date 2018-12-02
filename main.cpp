@@ -35,7 +35,8 @@ int main()
     cin >> dest;
     
     network.print();
-    network.DijkstraAlgorithm(src,dest);
+    //network.DijkstraAlgorithm(src,dest);
+    network.maxBandwidthAlgorithm(src,dest);
     
     return 0;
 }
@@ -81,7 +82,6 @@ void createGraph(string filename, Graph* network)
         fin >> vertA >> vertB >> cost;
         //cout << vertA << " " << vertB << " " << cost << endl;
         network->addEdge(vertA, vertB, cost);
-        network->addEdge(vertB, vertA, cost);
     }
     
     fin.close();
