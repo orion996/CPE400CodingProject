@@ -23,6 +23,7 @@ Graph::Graph()
         for(int j=0 ; j<SIZE ; j++)
         {
             graph[i][j] = 0;
+            pathsList[i][j] = -1;
         }
     }
     for(int i=0 ; i<numVert ; i++)
@@ -47,6 +48,7 @@ Graph::Graph(int n)
         for(int j=0 ; j<SIZE ; j++)
         {
             graph[i][j] = 0;
+            pathsList[i][j] = -1;
         }
     }
     
@@ -84,7 +86,6 @@ void Graph::addEdge(int a, int b, int cost)
 void Graph::print()
 {
     cout << "Graph Adj Table:" << endl;
-    cout << "Index starts at [0][0]" << endl << "Value at [i][j] shows the cost of the edge between Nodes i and j" << endl;
     for(int i=0 ; i<numVert ; i++)
     {
         for(int j=0 ; j<numVert ; j++)
@@ -160,6 +161,8 @@ void Graph::DijkstraAlgorithm(int src, int dest)
  */
 void Graph::maxBandwidthAlgorithm(int src, int dest)
 {
+    
+    //1) Find All paths from src to dest and store them in a file
     int pathIndex = 0;
     ofstream fout;
     fout.open("pathInfo.txt");
@@ -167,6 +170,85 @@ void Graph::maxBandwidthAlgorithm(int src, int dest)
     findAllPaths(src, dest, pathIndex, fout);
     
     fout.close();
+    
+    //2) Calculate the Max Bandwidth for each path found (bandwidth = min of all individal costs)
+    ifstream fin;
+    fin.open("pathInfo.txt");
+    
+    int pathNum = 0;
+    int routerNum = 0;
+    int temp = -1;
+    
+    while(!fin.eof())
+    {
+        fin >> temp;
+        pathsList[pathNum][routerNum++] = temp;
+        if(temp == dest)
+        {
+            pathNum++;
+            routerNum = 0;
+        }
+    }
+    
+    pathNum--;
+    
+    cout << endl <<"All Possible Paths from Router " << src << " to Router " << dest << ":" << endl;
+    for(int i=0 ; i<pathNum ; i++)
+    {
+        cout << "Path " << i << ": ";
+        for(int j=0 ; j<numVert ; j++)
+        {
+            if(pathsList[i][j] != -1)
+            {
+                if(pathsList[i][j] == dest)
+                    cout << pathsList[i][j];
+                else
+                    cout << pathsList[i][j] << " -> ";
+            }
+            
+        }
+        cout << endl;
+    }
+    
+    int routersInPath = 0;
+    BW bandwidths [pathNum]; 
+    cout << endl;
+    for(int i=0 ; i<pathNum ; i++)
+    {
+        cout << "Bandwidth of Path " << i << ": ";
+        for(int j=0 ; j<numVert ; j++)
+        {
+            if(pathsList[i][j] != -1)
+                routersInPath++;
+        }
+        
+        bandwidths[i].path = i;
+        bandwidths[i].bandwidth = findPathBandwidth(pathsList[i], routersInPath);
+        
+        cout << bandwidths[i].bandwidth << endl;
+        
+        routersInPath = 0;
+    }
+    
+    //3) Take the path with the max bandwidth and print it
+    
+    BW swapTemp;
+    for(int i=0 ; i<pathNum ; i++)
+    {
+        for(int j=i ; j<pathNum ; j++)
+        {
+            if(bandwidths[i].bandwidth <= bandwidths[j].bandwidth)
+            {
+                swapTemp =  bandwidths[i];
+                bandwidths[i] = bandwidths[j];
+                bandwidths[j] = swapTemp;
+            }
+        }
+    }
+    
+    cout << endl << "The path with the best Bandwidth is Path " << bandwidths[0].path << endl;
+    
+    
 }
 
 /**
@@ -202,4 +284,21 @@ void Graph::findAllPaths(int src, int dest, int pathIndex, ofstream& fout)
     pathIndex--;
     visited[src] = false;
     
+}
+
+/**
+ * @brief
+ * @param
+ * @return
+ */
+int Graph::findPathBandwidth(int path[], int routersInPath)
+{
+    int bandwidth = __INT_MAX__;
+    
+    for(int i=0 ; i<routersInPath-1 ; i++)
+    {
+        bandwidth = min(bandwidth, graph[path[i]][path[i+1]]); 
+    }
+    
+    return bandwidth;
 }

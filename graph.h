@@ -8,22 +8,32 @@
 
 #include <iostream>
 #include <fstream>
+#include <algorithm>
+#include <vector>
+#include <queue>
 
-#define SIZE 100
+#define SIZE 50
 
 using namespace std;
+
+struct BW //bandwidth
+{
+    int path;
+    int bandwidth;
+};
 
 class Graph 
 {
     private:
         int numVert; //number of vertices
         int graph[SIZE][SIZE]; //the adj table
-        bool* visited;//used by maxBandwidthAlgorithm
-        int *path; //used by maxBandwidthAlgorithm
- 
+        bool* visited;//used by findAllPaths
+        int *path; //used by findAllPaths
+        int pathsList[SIZE][SIZE];//used by maxBandwidthAlgorithm
         
-        int minPath(int[], bool[]);// used for Dijkstra's
+        int minPath(int[], bool[]);// used by DijkstraAlgorithm
         void findAllPaths(int, int, int, ofstream&);//used by maxBandwidthAlgorithm
+        int findPathBandwidth(int[], int);//used by maxBandwidthAlgorithm
         
     
     public:
