@@ -6,20 +6,18 @@
 #include "graph.h"
 
 /**
- * @brief
- * @param
- * @return
+ * @brief Default Constructor
+ * @param none
+ * @return Nothing
  */
 Graph::Graph()
 {
     numVert = 1;
-    //graph = new int*[numVert];
     visited = new bool[numVert];
     path = new int[numVert];
     
     for(int i=0 ; i<SIZE ; i++)
     {
-        //graph[i] = new int[numVert];
         for(int j=0 ; j<SIZE ; j++)
         {
             graph[i][j] = 0;
@@ -31,20 +29,18 @@ Graph::Graph()
 }
 
 /**
- * @brief
- * @param
- * @return
+ * @brief Constructor with number of vertices of graph
+ * @param n The number of vertices in the graph
+ * @return Nothing
  */
 Graph::Graph(int n)
 {
     numVert = n;
-    //graph = new int*[numVert];
     visited = new bool[numVert];
     path = new int[numVert];
     
     for(int i=0 ; i<SIZE ; i++)
     {
-        //graph[i] = new int[numVert];
         for(int j=0 ; j<SIZE ; j++)
         {
             graph[i][j] = 0;
@@ -57,18 +53,20 @@ Graph::Graph(int n)
 }
 
 /**
- * @brief
- * @param
- * @return
+ * @brief Deconstructor
+ * @param none
+ * @return Nothing
  */
 Graph::~Graph()
 {
 }
   
 /**
- * @brief
- * @param
- * @return
+ * @brief Adds an edge to the graph between two nodes a and b
+ * @param a The id of the first node
+ * @param b The id of the second node
+ * @param cost The edge cost
+ * @return Nothing
  */
 void Graph::addEdge(int a, int b, int cost)
 {
@@ -79,9 +77,9 @@ void Graph::addEdge(int a, int b, int cost)
 }
 
 /**
- * @brief
- * @param
- * @return
+ * @brief Prints the graph's adj table
+ * @param none
+ * @return Nothing
  */
 void Graph::print()
 {
@@ -95,9 +93,10 @@ void Graph::print()
 }
 
 /**
- * @brief
- * @param
- * @return
+ * @brief Finds the the minmum path for DijkstraAlgorithm
+ * @param dist[] The array of distances 
+ * @param sptSet[] The Shortest Path Tree Set
+ * @return The index of the shortest path in dist[]
  */
 int Graph::minPath(int dist[], bool sptSet[])
 {
@@ -116,9 +115,10 @@ int Graph::minPath(int dist[], bool sptSet[])
 }
 
 /**
- * @brief
- * @param
- * @return
+ * @brief Dijkstra's Shortest Path Algorithm to find the shotest path between two nodes
+ * @param src The id of the source node
+ * @param dest the id of the destination node
+ * @return Nothing
  */
 void Graph::DijkstraAlgorithm(int src, int dest)
 {
@@ -155,9 +155,10 @@ void Graph::DijkstraAlgorithm(int src, int dest)
 }
 
 /**
- * @brief
- * @param
- * @return
+ * @brief Finds the path with the maximum bandwidth between two nodes
+ * @param src The id of the source node
+ * @param dest The id of the destination node
+ * @return Nothing
  */
 void Graph::maxBandwidthAlgorithm(int src, int dest)
 {
@@ -225,7 +226,7 @@ void Graph::maxBandwidthAlgorithm(int src, int dest)
         bandwidths[i].path = i;
         bandwidths[i].bandwidth = findPathBandwidth(pathsList[i], routersInPath);
         
-        cout << bandwidths[i].bandwidth << endl;
+        cout << bandwidths[i].bandwidth << " bps" << endl;
         
         routersInPath = 0;
     }
@@ -246,15 +247,18 @@ void Graph::maxBandwidthAlgorithm(int src, int dest)
         }
     }
     
-    cout << endl << "The path with the best Bandwidth is Path " << bandwidths[0].path << endl;
+    cout << endl << "The path with the best Bandwidth is Path " << bandwidths[0].path << " with " << bandwidths[0].bandwidth << " bps" << endl;
     
     
 }
 
 /**
- * @brief
- * @param
- * @return
+ * @brief Finds all paths between two nodes using a modified DFS Algorithm
+ * @param src The id of the source node
+ * @param dest The id of the destination node
+ * @param pathIndex A storage of the index of the Path array used in the functon (passed as 0 on the first call)
+ * @param fout The output filesteam for storage of the paths found
+ * @return Nothing
  */
 void Graph::findAllPaths(int src, int dest, int pathIndex, ofstream& fout)
 {
@@ -287,9 +291,10 @@ void Graph::findAllPaths(int src, int dest, int pathIndex, ofstream& fout)
 }
 
 /**
- * @brief
- * @param
- * @return
+ * @brief Finds the bandwidth of a path of nodes
+ * @param path[] The array the path is stored in
+ * @param routersInPath The number of nodes in the path
+ * @return The bandwidth of the path
  */
 int Graph::findPathBandwidth(int path[], int routersInPath)
 {

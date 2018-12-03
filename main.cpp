@@ -4,8 +4,6 @@
 */
 
 #include <iostream>
-#include <fstream>
-#include <stdio.h>
 #include <string>
 #include "graph.h"
 
@@ -14,9 +12,9 @@ using namespace std;
 void createGraph(string, Graph*);
 
 /**
- * @brief
- * @param
- * @return
+ * @brief The main driver function for the project
+ * @param none
+ * @return 0 on a successful exit
  */
 int main()
 {
@@ -35,16 +33,16 @@ int main()
     cin >> dest;
     
     network.print();
-    //network.DijkstraAlgorithm(src,dest);
     network.maxBandwidthAlgorithm(src,dest);
     
     return 0;
 }
 
 /**
- * @brief
- * @param
- * @return
+ * @brief Creates a graph from a file
+ * @param filename The path to the config file
+ * @param *network The graph to store data to
+ * @return Nothing
  */
 void createGraph(string filename, Graph* network)
 {
