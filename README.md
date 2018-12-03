@@ -18,4 +18,5 @@ make
 Then enter a source Router and a destination router.
 
 ## Config File
-FORMAT: <Id of Router A> <Id of Router B> <Bandwidth of the edge>; The number of vertices inthe graph is defined in the main function;
+FORMAT: Id of Router A   Id of Router B   Bandwidth of the edge
+The number of vertices inthe graph is defined in the main function;
