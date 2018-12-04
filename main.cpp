@@ -18,7 +18,7 @@ void createGraph(string, Graph*);
  */
 int main()
 {
-    const int numVert = 8;
+    const int numVert = 9;
     Graph network(numVert);
     
     createGraph("graphData.txt",&network);
